@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class GeminiService:
     def __init__(self):
-        genai.configure(api_key="<put_your_api_key_here>")
+        genai.configure(api_key="your_api_key_here")  # Replace with your actual API key
         self.model = genai.GenerativeModel('gemini-2.0-flash')
     
     def generate_initial_questions(self, concern: str) -> List[str]:
@@ -19,7 +19,7 @@ class GeminiService:
         You are a medical AI assistant helping to conduct a health assessment. 
         A patient has expressed the following concern: "{concern}"
         
-        Generate 5 relevant, specific medical questions to better understand their condition.
+        Generate 2 relevant, specific medical questions to better understand their condition.
         The questions should be:
         1. Clear and easy to understand
         2. Medically relevant
@@ -35,7 +35,7 @@ class GeminiService:
             # Extract text from response
             if response.text:
                 questions = [q.strip() for q in response.text.strip().split('\n') if q.strip()]
-                return questions[:5]  # Ensure we get exactly 5 questions
+                return questions[:2]  # Ensure we get exactly 5 questions
             else:
                 raise Exception("No text generated from Gemini")
             
